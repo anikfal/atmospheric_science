@@ -1,0 +1,165 @@
+ $RP_INPUT
+!#################################################################
+!  CCATT-BRAMS/MCGA-CPTEC/WRF-Chem/FIM-Chem emission models CPTEC/INPE
+!  version 1.3: May 2012                                             
+!  contact: gmai@cptec.inpe.br   - http://meioambiente.cptec.inpe.br
+!#################################################################
+
+ 
+!---------------- grid_type of the grid output
+grid_type='lambert',
+ 
+!---------------- date of emission  
+ihour = 00,
+iday = 13,
+imon = 03,
+iyear = 2022,
+
+ !---------------- select the sources datasets to be used
+use_retro=1
+retro_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/RETRO/anthro',
+
+use_edgar=2
+
+edgar_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/EDGARV4'
+edgar_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/EDGARV4'
+
+use_gocart=1
+gocart_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/GOCART/emissions',
+
+use_streets=0
+!!!!!   streets_data_dir='./model_datain/EMISSION_DATA/STREETS',
+
+use_seac4rs=1
+seac4rs_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/SEAC4RS'
+   
+
+use_fwbawb=1
+fwbawb_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/Emissions_Yevich_Logan'
+
+use_bioge=1
+   ! ###### 
+   !# BIOGENIC = 1
+bioge_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/biogenic_emissions'
+   ! # MEGAN = 2
+   ! ######   
+bioge_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/biogenic_emissions'
+   ! ######
+
+use_gfedv2=1
+gfedv2_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/GFEDv2-8days'
+   
+use_bbem=1
+use_bbem_plumerise=0
+ 
+!--------------------------------------------------------------------------------------------------
+
+!---------------- if  the merging of gfedv2 with bbem is desired (=1, yes, 0 = no)
+merge_GFEDv2_bbem=1
+!---------------- Fire product for BBBEM/BBBEM-plumerise emission models
+bbem_wfabba_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/fires_data/WF_ABBA_v60_saulo/filt/f'
+bbem_modis_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/fires_data/MODIS/Fires.'
+bbem_inpe_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/fires_data/DSA/Focos'
+bbem_extra_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/fires_data/BLMALASKA/current.dat'
+
+!---------------- veg type data set (dir + prefix)
+veg_type_data_dir = '/home/anikfal/Global_emissions_v3/surface_data/GL_IGBP_MODIS_INPE/MODIS'
+
+
+!---------------- vcf type data set (dir + prefix)
+  use_vcf = 0,
+  vcf_type_data_dir      ='/model_datain/SURFACE_DATA/VCF/data_out/2005/VCF',
+!---------------- olson data set (dir + prefix)  
+olson_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/OLSON2/OLSON'
+       
+
+!---------------- carbon density data set (dir + prefix)
+   
+carbon_density_data_dir = '/home/anikfal/Global_emissions_v3/surface_data/GL_OGE_INPE'
+   
+!fuel_data_dir=1
+ 
+
+!---------------- gocart background
+use_gocart_bg=1
+gocart_bg_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/GOCART'
+gocart_bg_data_dir = '/home/anikfal/Global_emissions_v3/Emission_data/GOCART'
+
+!---------------- volcanoes emissions
+use_volcanoes=0
+   volcano_index =1143, !Popocatepetl
+
+   use_these_values='NONE',
+! define a text file for using external values for INJ_HEIGHT, DURATION,
+! MASS ASH (units are meters - seconds - kilograms) and the format for
+   begin_eruption='201903011200',  !begin time UTC of eruption YYYYMMDDhhmm   
+
+!---------------- degassing volcanoes emissions
+use_degass_volcanoes=0
+   degass_volc_data_dir ='./model_datain/EMISSION_DATA/VOLC_SO2', 
+
+!---------------- user specific  emissions directory
+!---------------- Update for South America megacities
+   user_data_dir='NONE',
+
+
+!--------------------------------------------------------------------------------------------------
+pond=1
+             !          1 -> Reactivity weighted   
+
+!---------------- for grid type 'll' or 'gg' only
+   grid_resolucao_lon=1.0,
+   grid_resolucao_lat=1.0,
+
+   nlat=192,          ! if gg (only global grid)
+   lon_beg   =  50, ! (-180.:+180.) long-begin of the output file
+   lat_beg   =  30, ! ( -90.:+90. ) lat -begin of the output file
+   delta_lon =  120., ! total long extension of the domain (360 for global)
+   delta_lat =  70., ! total lat  extension of the domain (180 for global)
+
+!---------------- For regional grids (polar or lambert)
+
+NGRIDS =  1,
+
+NNXP =   45,  46, 0, 0
+NNYP =   45,  46, 0, 0
+NXTNEST =    1,    1, 0, 0
+DELTAX =  30000,
+DELTAY =  30000,
+
+   ! Nest ratios between this grid and the next coarser grid.
+NSTRATX =    1,    3, 0, 0
+NSTRATY =    1,    3, 0, 0
+
+NINEST =    1,   15, 0, 0
+NJNEST =    1,   15, 0, 0
+                             !  corner of this nest will start.
+NINEST =    1,   15, 0, 0
+POLELAT =   30.00,
+POLELON =   50.00,
+
+STDLAT2 =   33.0,
+STDLAT2 =   33.0,
+							!(truelat2/truelat1 from namelist.wps, STDLAT1 < STDLAT2)
+STDLAT1 =   27.0,
+CENTLAT =   30.00,
+CENTLON =   50.00,
+
+
+
+!---------------- model output domain for each grid (only set up for rams)
+   lati =  -90.,  -90.,   -90., 
+   latf =  +90.,  +90.,   +90.,  
+   loni = -180., -180.,  -180., 
+   lonf =  180.,  180.,   180., 
+
+!---------------- project rams grid (polar sterogr) to lat/lon: 'YES' or 'NOT'
+proj_to_ll='NOT'
+   
+!---------------- output file prefix (may include directory other than the current)
+chem_out_prefix = 'outputemiss',
+chem_out_format = 'vfm',
+!---------------- convert to WRF/CHEM (yes,not)
+special_output_to_wrf = 'YES',
+   
+$END 
