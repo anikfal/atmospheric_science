@@ -1,0 +1,35 @@
+&share
+ wrf_core = 'ARW',
+ max_dom = 1,
+ start_date = '2022-03-13_00:00:00','2022-03-13_00:00:00',
+ end_date   = '2022-03-14_00:00:00','2022-03-14_21:00:00',
+ interval_seconds = 10800
+/
+
+&geogrid
+ parent_id         =   1,   1,
+ parent_grid_ratio =   1,   3,
+ i_parent_start    =   1,  15,
+ j_parent_start    =   1,  15,
+ e_we              =  45, 46,
+ e_sn              =  45, 46,
+ geog_data_res = 'default','default',
+ dx = 30000,
+ dy = 30000,
+ map_proj = 'lambert',
+ ref_lat   =  30.00,
+ ref_lon   =  50.00,
+ truelat1  =  27.0,
+ truelat2  =  33.0,
+ stand_lon =  50.0,
+ geog_data_path = '/run/media/anikfal/35701e17-624c-40df-b912-4b68c1858bfd/geog'
+/
+
+&ungrib
+ out_format = 'WPS',
+ prefix = 'PL',
+/
+
+&metgrid
+ fg_name = 'PL','SFC'
+/

@@ -1,0 +1,3 @@
+Sample namelist.wps and namelist.input for running the WRF/Chem model
+
+The program "set_prepchem_input.sh" is a tool to set "prep_chem_sources.inp" of the prep_chem_sources utility to extract emission data from global data
