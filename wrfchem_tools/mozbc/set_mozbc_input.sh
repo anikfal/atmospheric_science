@@ -99,13 +99,13 @@ check_add_var op2 C2H5OOH
 check_add_var ch3o2 CH3O2
 check_add_var c2h5oh C2H5OH
 check_add_var tpan MPAN
-check_add_var hc3 -> C3H8
-check_add_var hc5 -> BIGALK
-check_add_var iso -> ISOP
-check_add_var ket -> CH3COCH3
-check_add_var hket -> HYAC
-check_add_var ete -> C2H4
-check_add_var paa -> CH3COOOH
+check_add_var hc3 C3H8
+check_add_var hc5 BIGALK
+check_add_var iso ISOP
+check_add_var ket CH3COCH3
+check_add_var hket HYAC
+check_add_var ete C2H4
+check_add_var paa CH3COOOH
 echo "/" >>mozbc.inp
 
 echo "------SUCCESSFUL!------"
