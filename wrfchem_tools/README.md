@@ -9,3 +9,7 @@
 ### WRF/Chem:
 - namelist.wps
 - namelist.input
+
+### WRF/Chem:
+- namelist.input_dust
+- New dust sources for West Asia
