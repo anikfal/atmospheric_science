@@ -1,7 +1,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-w=addfile("geo_em.d01.nc", "w")  ;;; Enter your WPS geog file
+geog_file = "geo_em.d01.nc"  ;;; Enter your WPS geog file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+w=addfile(geog_file, "w")  ;;; Enter your WPS geog file
 westasia_dust = addfile("DS.nc", "r")
 wasf = westasia_dust->dustsource
 lat2d=w->XLAT_M(0,:,:)
@@ -31,3 +32,4 @@ erod_integrated = erod_in + erod_out
 copy_VarCoords(erod,erod_integrated); get the name of dimensions back
 
 w->EROD = erod_integrated ;replace Ginoux function with WASF, while preserving default Ginoux function for parts of the domain out of WASF
+print("New dust sources over West Asia have been applied on " + geog_file)
