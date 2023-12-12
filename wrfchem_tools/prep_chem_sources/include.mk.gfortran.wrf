@@ -1,0 +1,94 @@
+#Makefile include include.mk.opt
+############################## Change Log ##################################
+# 1.0.0.2
+#
+# 000908 MJB include.mk-mrc ##
+#            Added MAKE environment varaible.
+#            Added free format option to F_OPTS for some platforms. ##
+# 000907 MJB include.mk-mrc ##
+#            Changed the defualts to no NCAR Graphics and no parallel.
+#            Also commented out the machine specifics to force the user to
+#            select the appropriate machine for them. ##
+# 000823 MJB include.mk-mrc ##
+#            New - defines all make environment varaibles and is included
+#            in all make files. ##
+#
+############################################################################
+
+# Define make (gnu make works best).
+
+MAKE=/usr/bin/make
+
+# Activate appropriate parts below, comment out others.
+
+# NCAR Graphics.
+
+#---------------------------------------------------------------
+# If you are using a standard installation of NCAR Graphics, set:
+#       LOADER=ncargf90
+# in the machine-dependent sections below
+#LIBNCARG=
+#---------------------------------------------------------------
+# If you are using the NCAR dummy libraries...
+
+##NCARG_DIR=$(BASE)
+#NCARG_DIR=/usr/local/ncl-6.5.0/lb
+#LIBNCARG=-L$(NCARG_DIR) -lncarg-$(UTILS_VERSION) -lncarg_c-$(UTILS_VERSION) \
+#                        -lncarg_gks-$(UTILS_VERSION)
+#LIBNCARG=-L$(NCARG_DIR) -lncarg-$(UTILS_VERSION) 
+##LIBNCARG=$(BASE)/libncarg-$(UTILS_VERSION)-$(OPT).a
+#---------------------------------------------------------------
+# If you are using a real distribution of NCAR Graphics...
+#NCARG_DIR=/usr/local/ncarg-4.3.0/lib
+#LIBNCARG=-L$(NCARG_DIR) -lncarg -lncarg_gks -lncarg_c -L/usr/X11R6/lib -lX11 -ldl
+NCARG_DIR=/usr/lib64
+LIBNCARG=-L$(NCARG_DIR) -lncarg -lncarg_gks -lncarg_c -L/usr/X11R6/lib -lX11 -ldl
+#---------------------------------------------------------------
+
+# NETCDF libraries
+
+NETCDF=/usr
+NETCDF_INC=-I$(NETCDF)/include
+NETCDF_LIBS=-L$(NETCDF)/lib64 -lnetcdff -lnetcdf
+
+# HDF libraries
+
+HDF5=/usr
+HDF5_INC=-I$(HDF5)/include
+#HDF5_LIB=-L$(HDF5)/lib64 -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -ldl -L/scratchin/grupos/catt-brams/shared/libs/gfortran/zlib-1.2.8/lib -lz -ldl	
+HDF5_LIB=-L$(HDF5)/lib64 -lhdf5hl_fortran -lhdf5_fortran -lhdf5_hl -lhdf5 -ldl -lz -ldl	
+	 
+
+# Machine-dependent options.
+
+#-----------------  LINUX Portland Group pgf77/gcc ---------------
+CMACH=PC_LINUX1
+F_COMP=gfortran
+C_COMP=gcc
+LOADER=gfortran
+C_LOADER=gcc
+LIBS=/usr/lib64/gfortran/modules
+MOD_EXT=mod
+
+F_OPTS=  -Xpreprocessor -D$(CHEM) -O2 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -fallow-invalid-boz
+C_OPTS= -O2  
+LOADER_OPTS= -O2
+
+#-----------------------------------------------------------------
+
+
+# If compiling for a single-CPU platform only (without MPI):
+
+#-----------------------------------------------------------------
+PAR_LIBS=
+PAR_DEFS=
+#-----------------------------------------------------------------
+
+
+# For IBM,HP,SGI,ALPHA use these:
+ARCHIVE=ar rs
+# For NEC SX-6
+#ARCHIVE=sxar rs
+# For SUN,CONVEX
+#ARCHIVE=ar r'
+
