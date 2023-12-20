@@ -2,17 +2,14 @@
 #Contact person: Amirhossein Nikfal <https://github.com/anikfal>
 
 # Paths to Global_emissions and namelist.wps, and namelist.input (optional)
-#-----------------------------------------------------------
+#=====================================================================================
 global_emissions=/home/anikfal/Global_emissions_v3
 namelist_wps=/home/anikfal/WRFTEST/WPS/namelist.wps
 namelist_input=/home/anikfal/WRFTEST/WRF/test/em_real/namelist.input
-#-----------------------------------------------------------
-
-echo ---------------------------------------------------------------------------------------------------------------
-echo "BEFORE using this utility and running prep_chem_sources:"
-echo "Be sure that your namelist.wps and namelist.input files are okay,"
-echo "And you can run the WRF model without errors by chem_opt=0"
-echo ---------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------
+# After running this program, for linking the outputs, the variable below will be used:
+domain_number_link=1
+#=====================================================================================
 
 if [ ! -f prep_chem_sources.inp ]; then
     echo Error!
@@ -33,23 +30,23 @@ while getopts hlL option; do
     case $option in
     l)
         wrfdir=${namelist_input%/*}
-        echo Linking outputemiss*-ab.bin "-->" $wrfdir/emissopt3_d01
-        ln -sf $PWD/outputemiss*-ab.bin $wrfdir/emissopt3_d01
-        echo Linking outputemiss*-bb.bin "-->" $wrfdir/emissfire_d01
-        ln -sf $PWD/outputemiss*-bb.bin $wrfdir/emissfire_d01
-        echo Linking outputemiss*-g1-gocartBG.bin "-->" $wrfdir/wrf_gocart_backg
-        ln -sf $PWD/outputemiss*-g1-gocartBG.bin $wrfdir/wrf_gocart_backg
+        echo Linking outputemiss*g$domain_number_link-ab.bin "-->" $wrfdir/emissopt3_d01
+        ln -sf $PWD/outputemiss*g$domain_number_link-ab.bin $wrfdir/emissopt3_d01
+        echo Linking outputemiss*g$domain_number_link-bb.bin "-->" $wrfdir/emissfire_d01
+        ln -sf $PWD/outputemiss*g$domain_number_link-bb.bin $wrfdir/emissfire_d01
+        echo Linking outputemiss*-g$domain_number_link-gocartBG.bin "-->" $wrfdir/wrf_gocart_backg
+        ln -sf $PWD/outputemiss*-g$domain_number_link-gocartBG.bin $wrfdir/wrf_gocart_backg
         echo Successful!
         exit
         ;;
     L)
         wrfdir=${namelist_input%/*}
-        echo Linking outputemiss*-ab.bin "-->" $wrfdir/emissopt3_d01
-        ln -sf $PWD/outputemiss*-ab.bin $wrfdir/emissopt3_d01
-        echo Linking outputemiss*-bb.bin "-->" $wrfdir/emissfire_d01
-        ln -sf $PWD/outputemiss*-bb.bin $wrfdir/emissfire_d01
-        echo Linking outputemiss*-g1-gocartBG.bin "-->" $wrfdir/wrf_gocart_backg
-        ln -sf $PWD/outputemiss*-g1-gocartBG.bin $wrfdir/wrf_gocart_backg
+        echo Linking outputemiss*g$domain_number_link-ab.bin "-->" $wrfdir/emissopt3_d01
+        ln -sf $PWD/outputemiss*g$domain_number_link-ab.bin $wrfdir/emissopt3_d01
+        echo Linking outputemiss*g$domain_number_link-bb.bin "-->" $wrfdir/emissfire_d01
+        ln -sf $PWD/outputemiss*g$domain_number_link-bb.bin $wrfdir/emissfire_d01
+        echo Linking outputemiss*-g$domain_number_link-gocartBG.bin "-->" $wrfdir/wrf_gocart_backg
+        ln -sf $PWD/outputemiss*-g$domain_number_link-gocartBG.bin $wrfdir/wrf_gocart_backg
         echo Successful!
         exit
         ;;
@@ -61,10 +58,6 @@ while getopts hlL option; do
     esac
 done
 
-if [ ! -f prep_chem_sources.inp_copy ]; then
-    cp prep_chem_sources.inp prep_chem_sources.inp_copy
-    echo A copy of prep_chem_sources.inp has been saved as prep_chem_sources.inp_copy in the current directory.
-fi
 ls $namelist_wps 1>/dev/null 2>&1
 if [ $? != 0 ]; then
     echo Error!
@@ -78,6 +71,16 @@ if [ $? != 0 ]; then
     echo $global_emissions is not valid.
     echo Please set the correct path to global_emissions directory and run again.
     exit
+fi
+
+echo ---------------------------------------------------------------------------------------------------------------
+echo "Make sure that your namelist.wps and namelist.input files are okay,"
+echo "And you can run the WRF model without errors by chem_opt=0"
+echo ---------------------------------------------------------------------------------------------------------------
+
+if [ ! -f prep_chem_sources.inp_copy ]; then
+    cp prep_chem_sources.inp prep_chem_sources.inp_copy
+    echo A copy of prep_chem_sources.inp has been saved as prep_chem_sources.inp_copy in the current directory.
 fi
 
 get_from_namelist() { #first argument is the namelist variable, second argument is the field number
