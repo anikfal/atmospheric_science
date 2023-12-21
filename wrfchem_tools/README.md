@@ -1,5 +1,8 @@
 ## Auxiliary codes and namelists for the WRF/Chem tools and the WRF/Chem main model
 
+### anthro_emiss:
+- Makefile
+
 ### prep_chem_sources:
 - set_prepchem_input.sh
 
