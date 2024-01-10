@@ -1,4 +1,5 @@
-# ERA.java:
+# Array analysis in NetCDF-Java:
+## ERA.java:
 
 The dimensions of `d2m` (output of `System.out.println(d2m.getDimensions());`) are as follows:
 ```
