@@ -40,5 +40,6 @@ request = {
     "download_format": "unarchived",
     "area": [45, 35, 20, 70] #North, West, South, East
 }
+target = "level.grib"
 
-c.retrieve(dataset, request).download()
+c.retrieve(dataset, request, target).download()

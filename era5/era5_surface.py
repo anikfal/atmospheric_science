@@ -49,5 +49,6 @@ request = {
         70, #North, West, South, East
     ],
 }
+target = "single.grib"
 
-c.retrieve(dataset, request).download()
+c.retrieve(dataset, request, target).download()
