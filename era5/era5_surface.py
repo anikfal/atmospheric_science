@@ -51,4 +51,4 @@ request = {
 }
 target = "single.grib"
 
-c.retrieve(dataset, request, target).download()
+c.retrieve(dataset, request, target)
