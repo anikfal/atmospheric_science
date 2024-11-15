@@ -1,0 +1,19 @@
+look_up_time_range:
+  start_year: 2023
+  start_month: 3
+  start_day: 13
+  start_hour: 3
+  end_year: 2023
+  end_month: 3
+  end_day: 13
+  end_hour: 11
+
+look_up_geographical_domain:
+  north_latitude: 55
+  south_latitude: 45
+  west_longitude: 0
+  east_longitude: 10
+
+satellite_information:
+  sat_name_index: 20
+  data_time_interval: 6  # Minutes, <60
