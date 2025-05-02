@@ -44,11 +44,8 @@ request = {
     ],
     "data_format": "grib",
     "download_format": "unarchived",
-    'area': [
-        45, 35, 20,
-        70, #North, West, South, East
-    ],
+    'area': [ 45, 35, 20, 70 ] #North, West, South, East
 }
 target = "single.grib"
 
-c.retrieve(dataset, request, target)
+c.retrieve(dataset, request).download(target)

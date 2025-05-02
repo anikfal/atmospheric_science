@@ -42,4 +42,4 @@ request = {
 }
 target = "level.grib"
 
-c.retrieve(dataset, request, target)
+c.retrieve(dataset, request).download(target)
