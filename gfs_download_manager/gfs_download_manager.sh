@@ -27,10 +27,10 @@
 # Nikfal, A. and Karimi, M.A., 2024. Operational workflow to simulate biophysical variables, based on the coupled WRF/SEBAL models. Computers and Electronics in Agriculture, 222, p.109003.
 
 ###################################### INPUT VARIABLES ######################################
-start_year=2024     #Year of the start of the run
-start_month=6      #Month of the start of the run
-start_day=28        #Day of the start of the run
-total_run_hours=36  #Total run hours
+start_year=`date +%Y`     #Year of the start of the run
+start_month=`date +%m`      #Month of the start of the run
+start_day=`date +%d`        #Day of the start of the run
+total_run_hours=6  #Total run hours
 gfs_start_hour=12    # Choosable values: 0, 6, 12, or 18
 gfs_hour_interval=3 #Temporal resolution for the forecast intervals in hour (eg. 3 or 6 hours)
 #############################################################################################
