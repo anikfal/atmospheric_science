@@ -46,7 +46,7 @@ lon, lat, alt = orb.get_lonlatalt(mytime)
 
 **Impact**:
 - Eliminates unnecessary string conversion and parsing
-- Direct tuple unpacking is ~10x faster
+- Direct tuple unpacking is significantly faster (estimated 5-10x improvement)
 - More readable and Pythonic code
 
 #### Issue 3: Hard-coded Geographical Boundaries (Line 47)
@@ -109,7 +109,7 @@ All improvements have been validated with unit tests in `test_improvements.py`:
 
 **Estimated improvements**:
 - **90% reduction** in console output operations
-- **~10x faster** coordinate parsing
+- **5-10x faster** coordinate parsing (eliminates string conversion overhead)
 - **Better memory efficiency** with context managers
 - **More maintainable** code that respects configuration
 

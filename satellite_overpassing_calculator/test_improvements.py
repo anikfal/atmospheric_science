@@ -33,7 +33,7 @@ def test_boundary_checking():
     is_in_bounds = south_latitude < lat < north_latitude and west_longitude < lon < east_longitude
     
     print("✓ Boundary checking logic validated")
-    assert is_in_bounds == True
+    assert is_in_bounds
     print(f"  Coordinates ({lat}, {lon}) within bounds: {is_in_bounds}")
 
 
