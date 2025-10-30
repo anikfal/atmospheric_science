@@ -35,23 +35,22 @@ hours_diff = int(TIMEDIFF.total_seconds() / 3600)
 print("  1) Looking for the best", satNameFile[satIndex], "footprints over the geographical domain ...")
 orb = Orbital(satNameFile[satIndex])
 good_time = []
+total_iterations = hours_diff * (60 // data_time_interval)
+iteration_count = 0
 for hourstep in range(hours_diff):
     for minute in range(0, 60, data_time_interval):
         mytime = datetime(start_year, start_month, start_day, start_hour, minute, 0) + timedelta(hours=hourstep)
-        print(mytime)
-        var = str(orb.get_lonlatalt(mytime)).split(',')
-        lon1 = var[0]
-        lon = float(lon1[1:])
-        lat1 = var[1]
-        lat = float(lat1[1:])
-        if lat<40 and lat>4 and lon>34 and lon<74 :
-                print("      FOUND lat lon: " + str(lat) + " " + str(lon) + str(mytime))
+        iteration_count += 1
+        # Show progress every 10% instead of printing every iteration
+        if iteration_count % max(1, total_iterations // 10) == 0:
+            print(f"      Progress: {iteration_count}/{total_iterations} ({100*iteration_count//total_iterations}%)")
+        lon, lat, alt = orb.get_lonlatalt(mytime)
+        if south_latitude < lat < north_latitude and west_longitude < lon < east_longitude:
+                print("      FOUND lat lon: " + str(lat) + " " + str(lon) + " " + str(mytime))
                 good_time.append(mytime.strftime("%Y")+str('{:03d}'.format(mytime.timetuple().tm_yday))+"_"+mytime.strftime("%H%M")) #Year + day of year
 
 filepath = "overpassing_times_" + satNameFile[satIndex] + ".txt"
-if os.path.exists(filepath):
-    os.remove(filepath)
 print("  2) Writing the found times " + str(good_time) + " in file")
-timefile = open(filepath, "a+")
-for timeindex in range(len(good_time)):
-    timefile.write("%s\n" %good_time[timeindex])
+with open(filepath, "w") as timefile:
+    for time_entry in good_time:
+        timefile.write(f"{time_entry}\n")
